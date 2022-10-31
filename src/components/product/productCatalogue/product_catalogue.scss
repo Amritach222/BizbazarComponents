@@ -1,0 +1,23 @@
+@use '../../../sass/' as *;
+.rating{color:#FFD200;font-size:10px;list-style:none;}
+.rating-wrap{
+    padding: 0;
+    margin:0;
+    ul{
+        float:left;
+        padding: 0;
+    margin:0;
+    }
+}
+.rating li.disable{color:rgba(0,0,0,.2)};
+.mix-blend-multiply{
+    height:400px !important;
+    width: 400px !important;
+    object-fit: cover; 
+    
+}
+.product_image_container{
+    position:relative;
+    z-index: 100;
+    width: 100%;
+}
