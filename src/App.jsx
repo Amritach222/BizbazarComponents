@@ -1,14 +1,14 @@
 
 import './app.scss';
-import Product from './components/product/Product';
+import Landing from './pages/Landing';
 import { Routes, Route, } from "react-router-dom";
-import ProductCatalogue from './components/product/productCatalogue/ProductCatalogue';
+import Catalogue from './pages/Catalogue'
 function App() {
   return (
     <div className="App py-3">
-       <Routes>
-       <Route path="/" element={<Product />} />
-       <Route path="/product/" element={<ProductCatalogue />} />
+    <Routes>
+       <Route path="/" element={<Landing />} />
+       <Route path="/catalogue/" element={<Catalogue />} />
      </Routes>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./product_catalogue.scss";
 import DescandReviews from "../DescandReviews";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
@@ -7,43 +7,62 @@ import data from "../../../data";
 import SearchIcon from "@mui/icons-material/Search";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ReactImageMagnify from "react-image-magnify";
-// Importing lazyload package 
+// Importing lazyload package
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+// Import useSelector
+import { useDispatch, useSelector } from "react-redux";
+import { setColorItems } from "../../../feature/productCatalogue/productSlice";
 const rec_product_items = [1, 2, 3, 4, 5];
 const ProductCatalogue = () => {
-  const { product_images } = data.catalogue.product;
+  const dispatch = useDispatch();
+  //  catalogue image position
+  const current_image_position = useSelector((state) => state.product.position);
+  // chnage product available colors
+  const available_colors = useSelector(
+    (state) => state.product.available_color
+  );
+  const color_items = useSelector((state) => state.product.color_items);
   //Create useState to set the image tp the image container
-  const [pimage, setPimage] = useState(product_images[0]);
+  const [pimage, setPimage] = useState(available_colors[0].images[0]);
+  // hAndle  product colors
+  const handleImageColor = (color, index) => {
+    setPimage(color.images[0]);
+    dispatch(setColorItems(index));
+  };
   return (
-    <div className="container">
+    <div className="container mt-3">
       <section className=" bg-white shadow-sm">
         <div className="container">
-          <div className="row">
+          <div className={"row " + current_image_position}>
             <aside className="col-lg-6 product_image_container">
-              <article className="gallery-wrap gallery-vertical d-flex flex-row-reverse">
-                <div className="fluid__image-container card">
+              <article className={"gallery-wrap gallery-vertical "+useSelector((state)=>state.product.item_position)}>
+                <a
+                  href="#"
+                  className="img-big-nowrap img-thumbnail bg-light w-100"
+                >
                   <ReactImageMagnify
                     {...{
                       smallImage: {
                         alt: "Wristwatch by Ted Baker London",
                         isFluidWidth: true,
                         src: pimage,
-                        sizes:
-                          "(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px",
                       },
+                  
                       largeImage: {
                         src: pimage,
                         width: 1200,
                         height: 1800,
                       },
-
+                      isHintEnabled: true,
+                      sizes:
+                        "(min-width: 480px) 100vw, (min-width: 1200px) 30vw, 360px",
                       shouldUsePositiveSpaceLens: true,
                     }}
                   />
-                </div>
-                <div className="thumbs-wrap mb-3" style={{ float: "left" }}>
-                  {product_images.map((image, index) => {
-                    console.log("Hello Image");
+                </a>
+                <div className={useSelector((state)=>state.product.item_position)===('flex-column-reverse align-items-center' && 'flex-column align-items-center')?"thumbs-wrap mb-3 d-flex w-100 justify-content-center":'thumbs-wrap mb-3 '}>
+                  {color_items.map((image, index) => {
                     return (
                       <a href="#" className="item-thumb">
                         <LazyLoadImage
@@ -51,7 +70,7 @@ const ProductCatalogue = () => {
                           width="60"
                           height="60"
                           src={image}
-                          effect='blur' // opacity | black-and-white
+                          effect="blur" // opacity | black-and-white
                           loading="lazy"
                           onClick={() => setPimage(image)}
                         />
@@ -73,7 +92,7 @@ const ProductCatalogue = () => {
                     <li style={{ width: "80%" }} className="stars-active">
                       <LazyLoadImage
                         loading="lazy"
-                        effect='blur' // opacity | black-and-white
+                        effect="blur" // opacity | black-and-white
                         src="bootstrap5-ecommerce/images/misc/stars-active.svg"
                         alt=""
                       />
@@ -81,7 +100,7 @@ const ProductCatalogue = () => {
                     <li>
                       <LazyLoadImage
                         loading="lazy"
-                        effect='blur' // opacity | black-and-white
+                        effect="blur" // opacity | black-and-white
                         src="bootstrap5-ecommerce/images/misc/starts-disable.svg"
                         alt=""
                       />
@@ -118,36 +137,25 @@ const ProductCatalogue = () => {
                         <option>Large</option>{" "}
                       </select>
                     </div>{" "}
-                    <div class="col-md mb-3">
-                      <div class="mt-2">
-                        {" "}
-                        <label class="form-check form-check-inline">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="choose_11"
-                            value="option1"
-                          />
-                          <span class="form-check-label">Red</span>{" "}
-                        </label>
-                        <label class="form-check form-check-inline">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="choose_11"
-                            value="option1"
-                          />
-                          <span class="form-check-label">Green</span>{" "}
-                        </label>
-                        <label class="form-check form-check-inline">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="choose_11"
-                            value="option1"
-                          />
-                          <span class="form-check-label">Blue</span>{" "}
-                        </label>
+                    <div className="col-md mb-3">
+                      <div className="aside d-flex flex-wrap">
+                        {available_colors ? (
+                          available_colors.map((color, index) => {
+                            return (
+                              <LazyLoadImage
+                                effect="blur"
+                                key={index}
+                                src={color.images[0]}
+                                onClick={() => handleImageColor(color, index)}
+                                className="img-xs img-thumbnail ms-2 cursor-pointer"
+                              />
+                            );
+                          })
+                        ) : (
+                          <label class="form-check form-check-inline">
+                            No colors are available
+                          </label>
+                        )}
                       </div>{" "}
                     </div>
                   </div>
@@ -209,13 +217,13 @@ const ProductCatalogue = () => {
                         <LazyLoadImage
                           loading="lazy"
                           className="pic-1"
-                          effect='blur' // opacity | black-and-white
+                          effect="blur" // opacity | black-and-white
                           src="https://cdn11.bigcommerce.com/s-pkla4xn3/images/stencil/1280x1280/products/13937/138251/2018-spring-men-s-shirt-men-s-long-sleeved-cotton-shirt-youth-business-solid-color__78215.1544102574.jpg?c=2"
                         />
                         <LazyLoadImage
                           loading="lazy"
                           className="pic-2"
-                          effect='blur' // opacity | black-and-white
+                          effect="blur" // opacity | black-and-white
                           src="https://static-01.daraz.com.np/p/087f228b22bd047c445dde64f1fba838.jpg"
                         />
                       </a>
