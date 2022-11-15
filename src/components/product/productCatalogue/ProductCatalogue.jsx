@@ -13,6 +13,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 // Import useSelector
 import { useDispatch, useSelector } from "react-redux";
 import { setColorItems } from "../../../feature/productCatalogue/productSlice";
+import Share from "../../Share/Share";
 const rec_product_items = [1, 2, 3, 4, 5];
 const ProductCatalogue = () => {
   const dispatch = useDispatch();
@@ -115,6 +116,10 @@ const ProductCatalogue = () => {
                   <span className="label-rating text-muted">
                     {" "}
                     <i className="fa fa-shopping-basket"></i> 154 orders
+                  </span>{" "}
+                  <i className="dot"></i>
+                  <span className="label-rating text-muted">
+                    <Share/>
                   </span>{" "}
                 </div>
                 <hr />{" "}

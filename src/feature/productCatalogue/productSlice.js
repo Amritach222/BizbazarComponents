@@ -19,6 +19,7 @@ const initialState = {
   color_items: data.catalogue.product.product_color[0].images,
   item_position:product_item_position.bottom,
   rating:1,
+  review: ""
 };
 export const productSlice = createSlice({
   name: "product",
@@ -43,9 +44,14 @@ export const productSlice = createSlice({
     setRating:(state,action)=>{
       // call this  method to chnage the product rating 
       state.rating=action.payload;
+    },
+    writeReview:(state,action)=>{
+      //  call this method to write review
+      state.review=action.payload;
+      return 'success'
     }
   },
 });
 //Action Creators are generated for each case reducer function
-export const { changePosition, setColorItems, changeProductItemsPosition,setAvailableColor,setRating} = productSlice.actions;
+export const { changePosition, setColorItems, changeProductItemsPosition,setAvailableColor,setRating,writeReview} = productSlice.actions;
 export default productSlice.reducer;

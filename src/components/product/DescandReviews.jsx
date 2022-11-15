@@ -4,8 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { changeTab,} from "../../feature/productCatalogue/tabSlice";
-import { setRating } from "../../feature/productCatalogue/productSlice";
+import { setRating, writeReview } from "../../feature/productCatalogue/productSlice";
 const DescandReviews = () => {
+  // setting review to state
+  const [review,setReview]=useState("");
   // retrieve tab changer 
   const currentTab = useSelector((state) => state.tab_changer.tab);
   // get current rating state 
@@ -17,7 +19,11 @@ const DescandReviews = () => {
     //setting tab here
     dispatch(changeTab(tab));
   };
-
+// handle Review
+  const handleSubmitReview=(e)=>{
+    e.preventDefault();
+      dispatch(writeReview(review))
+  }
   return (
     <div className="desc_container">
       <div className="card">
@@ -505,18 +511,28 @@ const DescandReviews = () => {
               ></button>
             </div>
             <div className="modal-body">
+              <div className='rating-container ms-2'>
+                <label>Your Rating: </label>
             <div className="rating">
-             <i className={"fa fa-star "} onClick={()=>dispatch(setRating(1))}></i>
-             <i className={rating>=2?"fa fa-star":'fa fa-star text-secondary  '} onClick={()=>dispatch(setRating(2))}></i>
-             <i className={rating>=3?"fa fa-star":'fa fa-star text-secondary  '} onClick={()=>dispatch(setRating(3))}></i>
-             <i className={rating>=4?"fa fa-star":'fa fa-star text-secondary  '} onClick={()=>dispatch(setRating(4))}></i>
-             <i className={rating===5?"fa fa-star":'fa fa-star text-secondary  '} onClick={()=>dispatch(setRating(5))}></i>
+             <i role='button' className={"fa fa-star "} onClick={()=>dispatch(setRating(1))}></i>
+             <i role='button'  className={rating>=2?"fa fa-star ms-2":'fa fa-star text-secondary  ms-2 '} onClick={()=>dispatch(setRating(2))}></i>
+             <i role='button' className={rating>=3?"fa fa-star ms-2":'fa fa-star text-secondary  ms-2 '} onClick={()=>dispatch(setRating(3))}></i>
+             <i role='button' className={rating>=4?"fa fa-star ms-2":'fa fa-star text-secondary  ms-2 '} onClick={()=>dispatch(setRating(4))}></i>
+             <i role='button' className={rating===5?"fa fa-star ms-2":'fa fa-star text-secondary  ms-2 '} onClick={()=>dispatch(setRating(5))}></i>
             </div>
+              </div>
+
             </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-primary">
-                Submit
-              </button>
+            <div className="review-form m-2">
+            <form onSubmit={(e)=>handleSubmitReview(e)}>
+              <div className="mb-3">
+                <label htmlFor="exampleFormControlTextarea1" className="form-label">Write your review</label>
+                <textarea onChange={(event)=>setReview(event.target.value)} className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <div id="emailHelp" className="form-text">Before submitting a review, make sure that it does not violate the moderation rules: it does not contain links to third-party resources and insults.</div>
+              </div>
+              <button data-bs-dismiss="modal"
+                      aria-label="Close" type="submit" className="btn btn-primary float-end">Submit</button>
+            </form>
             </div>
           </div>
         </div>
