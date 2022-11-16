@@ -14,7 +14,8 @@ const multi_images=data.catalogue.product.product_color[0].images
 const ProductItem = () => {
   const [multiImage, setMultiImage] = useState(multi_images[0]);
   const [imageIndex,setImageIndex]=useState(0)
-  const toProductCatalogue = () => {
+  const toProductCatalogue = (e) => {
+    e.preventDefault();
     window.location.replace("/catalogue");
   };
   //this is to handle multiimage
@@ -29,9 +30,9 @@ const ProductItem = () => {
   return (
     <div className="container product_item mt-2">
       <div className="row">
-        <div className="col-md-3 col-sm-6" onClick={() => toProductCatalogue()}>
+        <div className="col-md-3 col-sm-6" >
           <div className="product-grid">
-            <div className="product-image">
+            <div className="product-image" onClick={(e) => toProductCatalogue(e)}>
             <div className="row position-absolute multi-image-row h-100 w-100 m-0 p-0 ">
             {
               multi_images.map((image,index)=>{
@@ -53,7 +54,7 @@ const ProductItem = () => {
               </a>
               <ul className="social">
                 <li>
-                  <a href="" data-tip="Quick View">
+                  <a href="" data-tip="Quick View" data-bs-toggle="modal" data-bs-target="#quickViewModal">
                     <SearchIcon />
                   </a>
                 </li>

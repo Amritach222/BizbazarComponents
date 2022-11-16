@@ -4,7 +4,7 @@ import {FacebookIcon, TwitterShareButton, FacebookShareButton, LinkedinIcon, Lin
 const shareUrl='https://getbootstrap.com/docs/5.0/components/dropdowns/'
 const Share=()=>{
     const [open, setOpen] = useState(false);
-    const id=1001;
+   
     const handleOpen=(e)=>{
         setOpen(!open);
     }
@@ -39,7 +39,7 @@ const Share=()=>{
 
                 </ul>
             </div>
-            <p className={open?'share_sites':'d-none'} >
+            <div className={open?'share_sites':'d-none'} >
             <ul className="list-group">
                 <li className="list-group-item">Cras justo odio</li>
                 <li className="list-group-item">Dapibus ac facilisis in</li>
@@ -47,7 +47,7 @@ const Share=()=>{
                 <li className="list-group-item">Porta ac consectetur ac</li>
                 <li className="list-group-item">Vestibulum at eros</li>
             </ul>
-        </p>
+        </div>
         </div>
     )
 }
