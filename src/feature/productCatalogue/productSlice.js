@@ -17,7 +17,7 @@ const initialState = {
   position: imagePositions.left,
   available_color: data.catalogue.product.product_color,
   color_items: data.catalogue.product.product_color[0].images,
-  item_position:product_item_position.bottom,
+  item_position:product_item_position.left,
   rating:1,
   review: ""
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import logo from '../../assets/images/bizlogo.png'
 const Bar = () => {
   return (
       <header className="section-header sticky-top">
@@ -8,7 +9,7 @@ const Bar = () => {
             <div className="row gy-3 align-items-center">
               <div className="col-lg-2 col-sm-4 col-4">
                 <a href="../index.html" className="navbar-brand">
-                  <img className="logo" height="40" src="images/logo.svg" />
+                  <LazyLoadImage className="logo" height="40" src={logo} effect='blur'/>
                 </a>
               </div>
               <div className="order-lg-last col-lg-5 col-sm-8 col-8">

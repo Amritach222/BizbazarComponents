@@ -3,8 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 // Import image lazyloading
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
-import { changeTab,} from "../../feature/productCatalogue/tabSlice";
-import { setRating, writeReview } from "../../feature/productCatalogue/productSlice";
+import { changeTab,} from "../../../feature/productCatalogue/tabSlice";
+import { setRating, writeReview } from "../../../feature/productCatalogue/productSlice";
+import Seller from "./Seller/Seller";
 const DescandReviews = () => {
   // setting review to state
   const [review,setReview]=useState("");
@@ -486,7 +487,7 @@ const DescandReviews = () => {
           <h3>Here is Shipping details</h3>
         </article>
         <article className={currentTab === "seller" ? "card-body" : "d-none"}>
-          <h3> Here is seller information. </h3>
+          <Seller/>
         </article>
       </div>
 
@@ -505,7 +506,7 @@ const DescandReviews = () => {
               </h5>
               <button
                 type="button"
-                className="btn-close"
+                className="btn-close btn-close-white"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>

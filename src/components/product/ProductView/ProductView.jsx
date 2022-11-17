@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import "./product_catalogue.scss";
-import DescandReviews from "./DescandReviews";
+import React,{useState} from 'react'
 import ReactImageMagnify from "react-image-magnify";
 // Importing lazyload package
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -9,31 +7,27 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setColorItems } from "../../../feature/productCatalogue/productSlice";
 import Share from "../../Share/Share";
-import ProductItem from "../ProductItem";
-const rec_product_items = [1, 2, 3, 4, 5];
-const ProductCatalogue = () => {
-  const dispatch = useDispatch();
-  //  catalogue image position
-  const current_image_position = useSelector((state) => state.product.position);
-  // chnage product available colors
-  const available_colors = useSelector(
-    (state) => state.product.available_color
-  );
-  const color_items = useSelector((state) => state.product.color_items);
-  //Create useState to set the image tp the image container
-  const [pimage, setPimage] = useState(available_colors[0].images[0]);
-  // hAndle  product colors
-  const handleImageColor = (color, index) => {
-    setPimage(color.images[0]);
-    dispatch(setColorItems(index));
-  };
+// Import css file
+import '../productCatalogue/product_catalogue.scss'
+const ProductView = () => {
+    const dispatch = useDispatch();
+    // chnage product available colors
+    const available_colors = useSelector(
+      (state) => state.product.available_color
+    );
+    const color_items = useSelector((state) => state.product.color_items);
+    //Create useState to set the image tp the image container
+    const [pimage, setPimage] = useState(available_colors[0].images[0]);
+    // hAndle  product colors
+    const handleImageColor = (color, index) => {
+      setPimage(color.images[0]);
+      dispatch(setColorItems(index));
+    };
   return (
-    <div className="container mt-3">
-      <section className=" bg-white shadow-sm">
-        <div className="container">
-          <div className={"row " + current_image_position}>
+    <div className='product_views'>
+    <div className={"row flex-row" }>
             <aside className="col-lg-6 product_image_container">
-              <article className={"gallery-wrap gallery-vertical "+useSelector((state)=>state.product.item_position)}>
+              <article className={"gallery-wrap gallery-vertical flex-row-reverse "}>
                 <a
                   href="#"
                   className="img-big-nowrap img-thumbnail bg-light w-100"
@@ -198,29 +192,8 @@ const ProductCatalogue = () => {
               </article>{" "}
             </div>{" "}
           </div>{" "}
-        </div>{" "}
-      </section>
-      <section className="padding-y bg-white shadow-sm">
-        <div className="container">
-          <DescandReviews />
-        </div>
-      </section>
-      <section className="padding-y bg-white shadow-sm">
-        <div className="container">
-          <h3>Recommended Products</h3>
-          <div className="recommended_items row my-2">
-            {rec_product_items.map((items, index) => {
-              return (
-                <div className="col-md-3 col-sm-6 my-2">
-                  <ProductItem/>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
     </div>
-  );
-};
+  )
+}
 
-export default ProductCatalogue;
+export default ProductView
