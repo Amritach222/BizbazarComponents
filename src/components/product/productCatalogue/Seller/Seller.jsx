@@ -26,7 +26,7 @@ const Seller = () => {
               {" "}
               <ul class="rating-stars">
                 {" "}
-                <li class="stars-active" style={{width: '70%'}}>
+                <li class="stars-active" style={{ width: "70%" }}>
                   {" "}
                   <img
                     src="bootstrap5-ecommerce/images/misc/stars-active.svg"
@@ -69,7 +69,10 @@ const Seller = () => {
             <i class="me-2 fa fa-comment-dots"></i> Message
           </button>{" "}
         </div>{" "}
-        <a href="https://bizbazar.com.np/vision-computer-solution/" class="btn w-100 btn-outline-primary">
+        <a
+          href="https://bizbazar.com.np/vision-computer-solution/"
+          class="btn w-100 btn-outline-primary"
+        >
           Visit store
         </a>{" "}
       </div>
