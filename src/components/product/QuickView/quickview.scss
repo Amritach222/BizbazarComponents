@@ -1,0 +1,9 @@
+@use '../../../sass' as *;
+.modal-content{
+    .modal-header{
+        background-color: $primary_color;
+        h5{
+            color:$white_color
+        }
+    }
+}
