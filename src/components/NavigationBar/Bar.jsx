@@ -1,7 +1,12 @@
 import React from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Link } from "react-router-dom";
 import logo from '../../assets/images/bizlogo.png'
+// importing useSelector to use  cart count 
+import { useSelector } from "react-redux";
 const Bar = () => {
+  // cart count 
+  const cartCount= useSelector((state)=>state.cart.count)
   return (
       <header className="section-header sticky-top">
         <section className="header-main bg-white">
@@ -22,14 +27,14 @@ const Bar = () => {
                     <i className="fa fa-heart"></i>{" "}
                     <span className="ms-1 d-none d-sm-inline-block">Wishlist</span>
                   </a>
-                  <a
-                    data-bs-toggle="offcanvas"
-                    href="#offcanvas_cart"
-                    className="btn btn-light"
+                  <Link
+                    to="/cart"
+                    className="btn btn-light position-relative"
                   >
                     <i className="fa fa-shopping-cart"></i>{" "}
                     <span className="ms-1">My cart </span>
-                  </a>
+                    <b className="notify"> {cartCount} </b>
+                  </Link>
                 </div>
               </div>
               <div className="col-lg-5 col-md-12 col-12">

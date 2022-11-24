@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setColorItems } from "../../../feature/productCatalogue/productSlice";
 import Share from "../../Share/Share";
 import ProductItem from "../ProductItem";
+import data from "../../../data";
+const all_product = data.catalogue.product;
 const rec_product_items = [1, 2, 3, 4, 5];
 const ProductCatalogue = () => {
   const dispatch = useDispatch();
@@ -212,7 +214,7 @@ const ProductCatalogue = () => {
             {rec_product_items.map((items, index) => {
               return (
                 <div className="col-md-3 col-sm-6 my-2">
-                  <ProductItem/>
+                  <ProductItem product={all_product[0]}/>
                 </div>
               );
             })}
