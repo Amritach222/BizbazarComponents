@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import data from "../../data";
-// To change the produt image position we write some postions to change
+// To change the product image position we write some positions to change
 const imagePositions = {
   left: "flex-row",
   right: "flex-row-reverse",
   top: "flex-column align-items-center",
 };
-// to chamge the product item position
+// to change the product item position
 const product_item_position = {
   left: "flex-row-reverse",
   right: "flex-row",
@@ -15,8 +15,8 @@ const product_item_position = {
 };
 const initialState = {
   position: imagePositions.left,
-  available_color: data.catalogue.product.product_color,
-  color_items: data.catalogue.product.product_color[0].images,
+  available_color: data.catalogue.product[0].product_color,
+  color_items: data.catalogue.product[0].product_color[0].images,
   item_position:product_item_position.left,
   rating:1,
   review: ""
@@ -42,7 +42,7 @@ export const productSlice = createSlice({
       state.item_position = product_item_position[action.payload];
     },
     setRating: (state, action) => {
-      // call this  method to chnage the product rating
+      // call this  method to change the product rating
       state.rating = action.payload;
     },
     writeReview: (state, action) => {
