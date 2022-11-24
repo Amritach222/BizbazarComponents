@@ -13,7 +13,7 @@ const Bar = () => {
           <div className="container">
             <div className="row gy-3 align-items-center">
               <div className="col-lg-2 col-sm-4 col-4">
-                <a href="../index.html" className="navbar-brand">
+                <a href="./" className="navbar-brand">
                   <LazyLoadImage className="logo" height="40" src={logo} effect='blur'/>
                 </a>
               </div>

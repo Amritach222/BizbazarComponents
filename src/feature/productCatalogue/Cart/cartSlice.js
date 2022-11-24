@@ -11,9 +11,14 @@ const cartSlice = createSlice({
         setCount:(state, action)=>{
             // api call to update cart count from here 
             state.count++;
+        },
+        // this is used to store  cart data 
+        setCartItem:(state,action)=>{
+            state.cartItem.push(action.payload);
+            state.count++;
         }
   },
 });
 //Action Creators are generated for each case reducer function
-export const {setCount} = cartSlice.actions;
+export const {setCount, setCartItem} = cartSlice.actions;
 export default cartSlice.reducer;

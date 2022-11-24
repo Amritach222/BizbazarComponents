@@ -14,16 +14,16 @@ import { Link } from "react-router-dom";
 // importing dispatch from react-redux
 import {useDispatch, useSelector} from 'react-redux'
 //import set cart count 
-import { setCount } from "../../feature/productCatalogue/Cart/cartSlice";
+import { setCount, setCartItem } from "../../feature/productCatalogue/Cart/cartSlice";
 const ProductItem = ({product}) => {
   const [multiImage, setMultiImage] = useState(product.product_color[0].images[0]);
   const [imageIndex, setImageIndex] = useState(0);
   // use dispatch 
   const dispatch= useDispatch();
-  var  cart=useSelector((state)=>state.cart.cartItem)  
    // Handle cart from here 
   const handleCart=(event,product)=>{
     event.preventDefault();
+    dispatch(setCartItem(product))
   }
   //this is to handle multiimage
   const handleMultiImage = (image, index) => {
